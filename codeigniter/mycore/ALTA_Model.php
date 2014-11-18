@@ -65,7 +65,13 @@ class ALTA_Model extends CI_Model
     }
 
     function select_all(){
-        
+        $sql = "SELECT * FROM $this->tbl";
+        $query = $this->db->query($sql);
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }
+        return false;
     }
 
     /**
