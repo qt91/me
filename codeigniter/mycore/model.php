@@ -3,7 +3,7 @@
 class {mdlName} extends ALTA_Model {
 
     public function __construct() {
-        parent::__construct('{tbl_id}','{tbl_name}');
+        parent::__construct('{tblID}','{tblName}');
     }
 
 }
