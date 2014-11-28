@@ -46,6 +46,8 @@ class ALTA_Model extends CI_Model
     * @param bool $flag -Nếu bằng 0 trả về True/False
     *                  - Nếu bằng 1 trả về ID hoặc False
     *                  - Nếu bằng 2 trả về Dữ liệu hoặc False
+    *                  - Nếu bằng 3 trả vê danh sách dữ liệu
+    *                  - Nếu bằng 4 trả về count
     */
     function select_where($where, $value,$specified = '=', $flag){
         $sql = "SELECT * FROM $this->tbl WHERE $where $specified ?";
@@ -59,6 +61,10 @@ class ALTA_Model extends CI_Model
                 return $data[$this->id];
             }elseif($flag == 2){
                 return $query->row(0,'array');
+            }elseif($flag == 3){
+                return $query->result_array();
+            }elseif($flag == 3){
+                return $query->num_rows();
             }
         }
         return false;
