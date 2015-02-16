@@ -11,6 +11,7 @@ $('#login_form').submit(function(event) {
             if(json.result){
                 //Using Toastr Notification
                 toastr.success(json.msg);
+                $(this).closest('form').find("input[type=text], textarea").val("");
             }
             else{
                 toastr.error(json.msg);
@@ -22,3 +23,4 @@ $('#login_form').submit(function(event) {
     });
     return false;
 });
+
