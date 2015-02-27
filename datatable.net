@@ -1,3 +1,81 @@
+var qtContent = $('#tblContent').on( 'page.dt',   function () { 
+            setTimeout(function(){
+              soundManager.onready(threeSixtyPlayer.init);
+            },2000);
+        } ).DataTable( {
+		            "processing": true,
+		            "serverSide": true,
+		            "ajax": "<?php echo base_url('index.php/show/content/'); ?>",
+		            "order": [[ 2, "desc" ]],
+                "aoColumnDefs":[
+                  {
+                     "aTargets":[3],
+                     "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
+                     {
+                         $(nTd).css('text-align', 'center');
+                     },
+                     "mData": null,
+                     "mRender": function( data, type, full) {    // You can use <img> as well if you want
+                        <?php
+                          $link = 'javascript:;';
+                          $kk = 'javascript:;';
+                          if($SessionUser['user_permission'] == 4){
+                            $link = base_url('index.php/content/active')."/'+full[6]+'";
+                          }
+                         ?>
+                        var NameCC = '<a href="<?php echo $link; ?>" class="btn btn-default btn-xs active" title="Xác nhận bài hát"><i class="fa fa-exclamation text-danger altaFcolor"></i></a>';
+                        if(full[3] == 1){
+                          NameCC = '<a href="javascript:;" data-toggle="class" class="btn btn-default btn-xs active"> <i class="fa fa-check text-danger altaFcolor1"></i> </a>';
+                        }
+                         return NameCC;
+                     }
+                  },
+                  {
+                     "aTargets":[4],
+                     "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
+                     {
+                         $(nTd).css('text-align', 'center');
+                     },
+                     "mData": null,
+                     "mRender": function( data, type, full) {    // You can use <img> as well if you want
+                         return '<div class="ui360"><a href="<?php echo base_url('public/data'); ?>/'+full[4]+'"></a></div>';
+                     }
+                  },
+                  {
+                     "aTargets":[5],
+                     "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
+                     {
+                         $(nTd).css('text-align', 'center');
+                     },
+                     "mData": null,
+                     "mRender": function( data, type, full) {    // You can use <img> as well if you want
+                         return '&nbsp&nbsp&nbsp<a class="btn btn-default" onclick="qtDel('+full[6]+',\''+full[1]+'\');"> <i class="fa fa-times-circle text"></i> <span class="text">Xóa</span> <i class="fa fa-check text-active"></i></a>';
+                     }
+                  },
+                ],
+		            
+		            //Language
+		            "language": {
+		                "sProcessing":   "Đang xử lý...",
+		                "sLengthMenu":   "Xem _MENU_ mục",
+		                "sZeroRecords":  "Không tìm thấy dòng nào phù hợp",
+		                "sInfo":         "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+		                "sInfoEmpty":    "Đang xem 0 đến 0 trong tổng số 0 mục",
+		                "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+		                "sInfoPostFix":  "",
+		                "sSearch":       "Tìm:",
+		                "sUrl":          "",
+		                "oPaginate": {
+		                    "sFirst":    "Đầu",
+		                    "sPrevious": "Trước",
+		                    "sNext":     "Tiếp",
+		                    "sLast":     "Cuối"
+		                }
+		            }
+		        } );
+
+
+
 //Language
 "language": {
     "sProcessing":   "Đang xử lý...",
